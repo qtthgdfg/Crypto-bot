@@ -1,0 +1,109 @@
+[workspace]
+resolver = "2"
+members  = [
+    ".",
+    "crates/bot_config",
+    "crates/bot_types",
+    "crates/bot_db",
+    "crates/bot_exchange",
+    "crates/bot_indicators",
+    "crates/bot_smc",
+    "crates/bot_signals",
+    "crates/bot_scanner",
+    "crates/bot_risk",
+    "crates/bot_learning",
+    "crates/bot_advisor",
+    "crates/bot_telegram",
+]
+
+# ── Shared metadata ───────────────────────────────────────────────
+[workspace.package]
+version     = "3.0.0"
+edition     = "2021"
+license     = "MIT"
+repository  = "https://github.com/your-org/pro-trading-bot"
+
+# ── Shared dependency versions — every crate inherits from here ──
+[workspace.dependencies]
+# Async
+tokio             = { version = "1.38", features = ["full"] }
+tokio-tungstenite = { version = "0.21", features = ["native-tls"] }
+futures-util      = "0.3"
+async-trait       = "0.1"
+# Serialisation
+serde      = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+# Decimal arithmetic (no float errors on prices)
+rust_decimal = { version = "1.35", features = ["serde-float"] }
+# Database
+rusqlite = { version = "0.31", features = ["bundled"] }
+# HTTP
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+# Crypto / signing
+hmac = "0.12"
+sha2 = "0.10"
+hex  = "0.4"
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+# Error handling
+anyhow    = "1.0"
+thiserror = "1.0"
+# Logging
+tracing            = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+# Config
+dotenvy = "0.15"
+# Retry + rate-limit
+tokio-retry = "0.3"
+# UUID
+uuid = { version = "1.8", features = ["v4"] }
+# Workspace-local crates
+bot_config    = { path = "crates/bot_config" }
+bot_types     = { path = "crates/bot_types" }
+bot_db        = { path = "crates/bot_db" }
+bot_exchange  = { path = "crates/bot_exchange" }
+bot_indicators = { path = "crates/bot_indicators" }
+bot_smc       = { path = "crates/bot_smc" }
+bot_signals   = { path = "crates/bot_signals" }
+bot_scanner   = { path = "crates/bot_scanner" }
+bot_risk      = { path = "crates/bot_risk" }
+bot_learning  = { path = "crates/bot_learning" }
+bot_advisor   = { path = "crates/bot_advisor" }
+bot_telegram  = { path = "crates/bot_telegram" }
+
+# ── Root binary crate ─────────────────────────────────────────────
+[package]
+name    = "pro_trading_bot"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+tokio              = { workspace = true }
+tracing            = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow             = { workspace = true }
+dotenvy            = { workspace = true }
+bot_config         = { workspace = true }
+bot_types          = { workspace = true }
+bot_db             = { workspace = true }
+bot_exchange       = { workspace = true }
+bot_scanner        = { workspace = true }
+bot_signals        = { workspace = true }
+bot_risk           = { workspace = true }
+bot_learning       = { workspace = true }
+bot_advisor        = { workspace = true }
+bot_telegram       = { workspace = true }
+
+# ── Build profiles ────────────────────────────────────────────────
+[profile.release]
+opt-level     = 3
+lto           = "fat"       # whole-program link-time optimisation
+codegen-units = 1
+panic         = "abort"
+strip         = true
+
+[profile.dev]
+opt-level = 1
+
+[profile.test]
+opt-level = 1

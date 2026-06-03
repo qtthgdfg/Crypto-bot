@@ -1,0 +1,20 @@
+[package]
+name    = "bot_learning"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+bot_types    = { workspace = true }
+bot_config   = { workspace = true }
+bot_db       = { workspace = true }
+bot_exchange = { workspace = true }
+bot_scanner  = { workspace = true }
+bot_signals  = { workspace = true }
+bot_risk     = { workspace = true }
+bot_advisor  = { workspace = true }
+bot_telegram = { workspace = true }
+tokio        = { workspace = true }
+tracing      = { workspace = true }
+thiserror    = { workspace = true }
+chrono       = { workspace = true }
+rust_decimal = { workspace = true }

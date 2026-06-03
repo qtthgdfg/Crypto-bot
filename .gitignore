@@ -1,0 +1,27 @@
+# Secrets — NEVER commit
+.env
+*.key
+*.pem
+
+# Build artifacts
+/target/
+*.d
+
+# SQLite runtime database
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Backup
+*.bak
+*.orig

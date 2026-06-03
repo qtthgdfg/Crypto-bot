@@ -1,0 +1,14 @@
+[package]
+name    = "bot_scanner"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+bot_types      = { workspace = true }
+bot_exchange   = { workspace = true }
+bot_indicators = { workspace = true }
+bot_smc        = { workspace = true }
+tokio          = { workspace = true }
+tracing        = { workspace = true }
+thiserror      = { workspace = true }
+rust_decimal   = { workspace = true }

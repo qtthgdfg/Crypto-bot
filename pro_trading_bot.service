@@ -1,0 +1,54 @@
+# ================================================================
+#  pro_trading_bot.service — Run the bot as a systemd daemon
+#
+#  Install:
+#    1. Edit WorkingDirectory and ExecStart to your actual paths
+#    2. sudo cp pro_trading_bot.service /etc/systemd/system/
+#    3. sudo systemctl daemon-reload
+#    4. sudo systemctl enable pro_trading_bot
+#    5. sudo systemctl start  pro_trading_bot
+#
+#  Operate:
+#    sudo systemctl status  pro_trading_bot
+#    sudo journalctl -u pro_trading_bot -f
+#    sudo systemctl restart pro_trading_bot
+# ================================================================
+
+[Unit]
+Description=Pro Trading Bot v3.0 — Binance Edition
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/pro_trading_bot
+ExecStart=/home/ubuntu/pro_trading_bot/target/release/pro_trading_bot
+EnvironmentFile=/home/ubuntu/pro_trading_bot/.env
+Environment=RUST_LOG=info
+
+# Auto-restart on crash, 10-second cooldown
+Restart=on-failure
+RestartSec=10s
+
+# Resource limits
+MemoryMax=512M
+Nice=-5
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/ubuntu/pro_trading_bot
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pro_trading_bot
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+[package]
+name    = "bot_smc"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+bot_types    = { workspace = true }
+bot_indicators = { workspace = true }
+thiserror    = { workspace = true }
+rust_decimal = { workspace = true }

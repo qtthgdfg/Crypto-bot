@@ -1,0 +1,13 @@
+[package]
+name    = "bot_signals"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+bot_types      = { workspace = true }
+bot_indicators = { workspace = true }
+bot_smc        = { workspace = true }
+rust_decimal   = { workspace = true }
+chrono         = { workspace = true }
+uuid           = { workspace = true }
+tracing        = { workspace = true }

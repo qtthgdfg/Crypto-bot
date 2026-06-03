@@ -1,0 +1,13 @@
+[package]
+name    = "bot_advisor"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+bot_types    = { workspace = true }
+bot_config   = { workspace = true }
+bot_db       = { workspace = true }
+bot_telegram = { workspace = true }
+tokio        = { workspace = true }
+tracing      = { workspace = true }
+rust_decimal = { workspace = true }
